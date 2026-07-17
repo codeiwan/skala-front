@@ -276,6 +276,27 @@ mark {
   margin-top: clamp(28px, 5vw, 58px);
 }
 
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--sk-red);
+  font-family: "Montserrat", "Noto Sans KR", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 24px;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, var(--sk-red), var(--sk-orange));
+  border-radius: 999px;
+}
+
 /* ==========================================================================
    메인 페이지 히어로 영역
    ========================================================================== */
@@ -314,6 +335,29 @@ mark {
   content: "";
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy h1 {
+  max-width: 760px;
+  margin-bottom: 24px;
+}
+
+.hero-copy h1 strong {
+  display: block;
+  color: var(--sk-red);
+  font-weight: 800;
+}
+
+.hero-copy p {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: #5a606c;
+  font-size: clamp(1rem, 1.6vw, 1.16rem);
 }
 
 /* ==========================================================================
@@ -452,4 +496,29 @@ mark {
   background: #f7f8fa;
   border-top: 1px solid #e2e5ea;
   font-size: 0.86rem;
+}
+
+.site-footer-inner {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-footer p {
+  margin-bottom: 6px;
+}
+
+.site-footer p:last-child {
+  margin-bottom: 0;
+}
+
+.footer-mark {
+  color: var(--sk-red);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
