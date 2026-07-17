@@ -3,46 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>나의 여행지</title>
+  <title>여행 앨범</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>🌍 나의 여행 앨범 🎵</h1>
-    <audio controls>
-      <source src="../media/music.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
-  
-    <hr>
-  
-    <div class="trip-grid-container">
-      <p class="trip-card">
-        <img src="../media/리장.jpg" width="400" alt="리장 호도협"><br>
-        리장 호도협 (2025년)
-      </p>
-      <p class="trip-card">
-        <img src="../media/세부.jpg" width="400" alt="세부 탑스힐"><br>
-        세부 탑스힐 (2024년)
-      </p>
-      <p class="trip-card">
-        <img src="../media/홋카이도.jpg" width="400" alt="홋카이도 대설산"><br>
-        홋카이도 대설산 (2025년)
-      </p>
-    </div>
-
-    <hr>
-    
-    <h2>나의 여행 브이로그</h2>
+  <a href="#main-content">본문 바로가기</a>
+  <header>
     <div>
-      <p>
-        <video width="400" controls>
-          <source src="../media/video.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-        <br>
-        리장의 아름다운 음악
-      </p>
+      <a href="index.html">
+        <span><span>IW</span></span>
+        <span>
+          <span>박이완의 유니버스</span>
+          <span>SKALA Front-end Project</span>
+        </span>
+      </a>
+
+      <nav>
+        <a href="myProfile.html">프로필</a>
+        <a href="myClass.html">수업</a>
+        <a href="myTrip.html">여행</a>
+        <a href="signUp.html">회원가입</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div>
+      <header>
+        <a href="index.html">← 메인으로 돌아가기</a>
+        <span>Travel Archive</span>
+        <h1>나의 여행 앨범</h1>
+        <p>사진, 음악, 영상으로 여행의 순간을 기록한 개인 아카이브입니다.</p>
+      </header>
+
+      <main id="main-content">
+        <section>
+          <div>
+            <div>
+              <span>Featured Places</span>
+              <h2>기억에 남은 여행지</h2>
+              <p>각 사진에 마우스를 올리면 이미지가 자연스럽게 확대됩니다. 모바일에서는 한 열로 배치되어 사진에 집중할 수 있습니다.</p>
+            </div>
+            <div>
+              <audio controls preload="metadata">
+                <source src="../media/music.mp3" type="audio/mpeg">
+                브라우저가 오디오 요소를 지원하지 않습니다.
+              </audio>
+            </div>
+          </div>
+
+          <div>
+            <figure>
+              <img src="../media/리장.jpg" alt="중국 리장 호도협의 산과 협곡 풍경" loading="lazy">
+              <figcaption><strong>리장 호도협</strong><span>China · 2025</span></figcaption>
+            </figure>
+            <figure>
+              <img src="../media/세부.jpg" alt="필리핀 세부 탑스힐에서 내려다본 도시 풍경" loading="lazy">
+              <figcaption><strong>세부 탑스힐</strong><span>Philippines · 2024</span></figcaption>
+            </figure>
+            <figure>
+              <img src="../media/홋카이도.jpg" alt="일본 홋카이도 대설산의 자연 풍경" loading="lazy">
+              <figcaption><strong>홋카이도 대설산</strong><span>Japan · 2025</span></figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section>
+          <div><div><span>Travel Vlog</span><h2>여행 브이로그</h2></div></div>
+          <article>
+            <video controls preload="metadata">
+              <source src="../media/video.mp4" type="video/mp4">
+              브라우저가 비디오 요소를 지원하지 않습니다.
+            </video>
+            <div>
+              <span>VIDEO ARCHIVE</span>
+              <h3>리장의 아름다운 음악</h3>
+              <p>사진만으로 남기기 어려운 현장의 분위기와 소리를 영상으로 기록했습니다.</p>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer>
+        <div>
+          <p><small>&copy; 2026 박이완의 유니버스.</small></p>
+          <span>Travel</span>
+        </div>
+      </footer>
     </div>
   </div>
 </body>
