@@ -152,7 +152,7 @@ mark {
 }
 
 .header-inner {
-  width: min(calc(100% - 40px), var(--content-width));
+  width: min(calc(100% - 40px), 1240px);
   height: 100%;
   display: flex;
   align-items: center;
@@ -258,4 +258,198 @@ mark {
   width: min(calc(100% - 40px), 1240px);
   margin-inline: auto;
   padding-block: clamp(30px, 5vw, 68px);
+}
+
+.page-shell {
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 24px;
+  box-shadow: 0 10px 28px rgba(16, 17, 20, 0.07);
+}
+
+.page-content {
+  padding: clamp(24px, 4vw, 54px);
+}
+
+.content-section + .content-section {  /* 인접 형제 선택자 활용 */
+  margin-top: clamp(28px, 5vw, 58px);
+}
+
+/* ==========================================================================
+   메인 페이지 히어로 영역
+   ========================================================================== */
+
+.site-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 510px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 90px);
+  padding: clamp(48px, 8vw, 104px);
+  background: #ffffff;
+}
+
+.site-hero::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(42%, 520px);
+  height: 100%;
+  content: "";
+  background:
+    linear-gradient(135deg, rgba(234, 0, 44, 0.97), rgba(244, 119, 37, 0.93)),
+    var(--sk-red);
+  clip-path: polygon(28% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.site-hero::after {
+  position: absolute;
+  top: 10%;
+  right: 3%;
+  width: 280px;
+  height: 280px;
+  content: "";
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+}
+
+/* ==========================================================================
+   메인 페이지 주요 콘텐츠 바로가기
+   ========================================================================== */
+
+.quick-nav {
+  padding: clamp(28px, 5vw, 54px);
+  background: #f7f8fa;
+  border-top: 1px solid #e2e5ea;
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.quick-nav ul {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quick-nav a {
+  position: relative;
+  min-height: 164px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px;
+  overflow: hidden;
+  color: #17191e;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 16px;
+  text-decoration: none;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quick-nav a::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4px;
+  content: "";
+  background: linear-gradient(90deg, var(--sk-red), var(--sk-orange));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quick-nav a:hover {
+  color: var(--sk-red);
+  border-color: rgba(234, 0, 44, 0.22);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-5px);
+}
+
+.quick-nav a:hover::before {
+  transform: scaleX(1);
+}
+
+/* ==========================================================================
+   메인 대시보드 및 실시간 정보
+   ========================================================================== */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(310px, 0.9fr);
+  gap: 24px;
+  padding: clamp(28px, 5vw, 54px);
+}
+
+/* ==========================================================================
+   하위 페이지 공통 상단 소개 영역
+   ========================================================================== */
+
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(42px, 7vw, 86px);
+  background: #ffffff;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-hero::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 210px;
+  height: 100%;
+  content: "";
+  background: linear-gradient(160deg, var(--sk-red), var(--sk-orange));
+  clip-path: polygon(52% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.page-hero::after {
+  position: absolute;
+  right: 32px;
+  bottom: -74px;
+  width: 160px;
+  height: 160px;
+  content: "";
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+}
+
+.page-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero h1 {
+  max-width: 850px;
+  margin-bottom: 16px;
+}
+
+.page-hero p {
+  max-width: 720px;
+  margin-bottom: 0;
+  color: var(--ink-600);
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+}
+
+/* ==========================================================================
+   공통 푸터
+   ========================================================================== */
+
+.site-footer {
+  padding: 28px clamp(24px, 4vw, 54px) 34px;
+  color: #777e8a;
+  background: #f7f8fa;
+  border-top: 1px solid #e2e5ea;
+  font-size: 0.86rem;
 }
