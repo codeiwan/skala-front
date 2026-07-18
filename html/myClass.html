@@ -46,17 +46,40 @@
             <p>수업이 연속되는 시간은 병합된 셀로 표현했습니다.</p>
           </div>
 
+          <!-- 현재 요일과 진행 중인 수업을 알려주는 상태 패널 -->
+          <div class="schedule-live-panel" aria-live="polite">
+            <div class="schedule-live-copy">
+              <span class="schedule-live-label">LIVE SCHEDULE</span>
+              <h3 id="schedule-current-title">
+                현재 학습 일정을 확인하는 중입니다.
+              </h3>
+              <p id="schedule-current-description">
+                브라우저의 날짜와 시간을 기준으로 표시합니다.
+              </p>
+
+              <div class="schedule-legend" aria-label="시간표 강조 표시 안내">
+                <span class="schedule-legend-today">오늘 요일</span>
+                <span class="schedule-legend-current">현재 일정</span>
+              </div>
+            </div>
+
+            <div class="schedule-clock">
+              <span id="schedule-current-date">날짜 확인 중</span>
+              <strong id="schedule-current-time">--:--</strong>
+            </div>
+          </div>
+
           <div class="table-wrapper">
-            <table>
+            <table id="weekly-schedule">
               <caption>2026년 주간 강의 및 프로젝트 시간표</caption>
               <thead>
                 <tr>
-                  <th>시간</th>
-                  <th>월요일</th>
-                  <th>화요일</th>
-                  <th>수요일</th>
-                  <th>목요일</th>
-                  <th>금요일</th>
+                  <th scope="col">시간</th>
+                  <th scope="col">월요일</th>
+                  <th scope="col">화요일</th>
+                  <th scope="col">수요일</th>
+                  <th scope="col">목요일</th>
+                  <th scope="col">금요일</th>
                 </tr>
               </thead>
               <tbody>
@@ -121,5 +144,6 @@
       </footer>
     </div>
   </div>
+  <script src="../script/classSchedule.js"></script>
 </body>
 </html>

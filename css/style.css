@@ -2950,6 +2950,250 @@ select:focus {
    강의 시간표
    ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   현재 일정 상태 패널
+   -------------------------------------------------------------------------- */
+
+.schedule-live-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 22px 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(244, 119, 37, 0.14),
+      transparent 38%
+    ),
+    linear-gradient(
+      145deg,
+      var(--sk-red-soft),
+      #ffffff 70%
+    );
+  border: 1px solid rgba(234, 0, 44, 0.15);
+  border-left: 4px solid var(--sk-red);
+  border-radius: 16px;
+  box-shadow: 0 9px 24px rgba(16, 17, 20, 0.06);
+}
+
+.schedule-live-copy {
+  min-width: 0;
+}
+
+.schedule-live-label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--sk-red);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.schedule-live-copy h3 {
+  margin-bottom: 5px;
+  font-size: clamp(1.12rem, 2vw, 1.42rem);
+}
+
+.schedule-live-copy p {
+  margin-bottom: 0;
+  color: #5a606c;
+  font-size: 0.86rem;
+}
+
+.schedule-clock {
+  min-width: 150px;
+  padding: 14px 17px;
+  color: #ffffff;
+  background: var(--sk-navy);
+  border-radius: 13px;
+  text-align: right;
+  box-shadow: 0 10px 24px rgba(14, 48, 109, 0.18);
+}
+
+.schedule-clock span,
+.schedule-clock strong {
+  display: block;
+}
+
+.schedule-clock span {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+}
+
+.schedule-clock strong {
+  margin-top: 2px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.48rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.schedule-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 14px;
+}
+
+.schedule-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #5a606c;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.schedule-legend span::before {
+  width: 10px;
+  height: 10px;
+  content: "";
+  border-radius: 3px;
+}
+
+.schedule-legend-today::before {
+  background: rgba(14, 48, 109, 0.17);
+  border: 1px solid rgba(14, 48, 109, 0.32);
+}
+
+.schedule-legend-current::before {
+  background: var(--sk-red);
+  box-shadow: 0 0 0 3px rgba(234, 0, 44, 0.1);
+}
+
+
+/* --------------------------------------------------------------------------
+   오늘 요일 및 현재 시간 강조
+   -------------------------------------------------------------------------- */
+
+/* 오늘 요일의 헤더 */
+thead th.is-today-column {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background:
+    linear-gradient(
+      135deg,
+      var(--sk-red),
+      var(--sk-red-dark)
+    );
+  box-shadow:
+    inset 0 -4px 0 var(--sk-orange);
+}
+
+/* 오늘 요일에 해당하는 수업 셀 */
+tbody td.is-today-column {
+  position: relative;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14, 48, 109, 0.08),
+      rgba(255, 255, 255, 0.96)
+    );
+  box-shadow:
+    inset 2px 0 0 rgba(14, 48, 109, 0.12),
+    inset -2px 0 0 rgba(14, 48, 109, 0.12);
+}
+
+/* rowspan 셀의 기존 배경보다 오늘 요일 강조가 우선되도록 처리 */
+tbody td[rowspan].is-today-column {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14, 48, 109, 0.1),
+      var(--sk-red-soft)
+    );
+}
+
+/* 현재 시간 구간의 왼쪽 시간 셀 */
+tbody th.is-current-time {
+  position: relative;
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--sk-orange),
+      #d85e0d
+    );
+  box-shadow:
+    inset 4px 0 0 var(--sk-red);
+}
+
+/* 오늘 요일과 현재 시간이 만나는 실제 일정 */
+tbody td.is-current-class {
+  position: relative;
+  z-index: 2;
+  color: #252830;
+  background:
+    linear-gradient(
+      135deg,
+      var(--sk-red-soft),
+      var(--sk-orange-soft)
+    );
+  box-shadow:
+    0 0 0 3px rgba(234, 0, 44, 0.12),
+    0 10px 22px rgba(234, 0, 44, 0.18);
+}
+
+tbody td.is-current-class::after {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 6px;
+  content: "NOW";
+  color: var(--sk-red);
+  background: #ffffff;
+  border-radius: 999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+/* 점심시간이 현재 일정이면 주황색으로 구분 */
+.lunch-row td.is-current-class {
+  color: #ffffff;
+  background:
+    linear-gradient(
+      135deg,
+      var(--sk-orange),
+      #d85e0d
+    );
+  box-shadow:
+    0 0 0 3px rgba(244, 119, 37, 0.13),
+    0 10px 22px rgba(244, 119, 37, 0.18);
+}
+
+.lunch-row td.is-current-class::after {
+  color: #a94809;
+}
+
+
+/* 태블릿: 실시간 상태 패널을 한 열로 배치 */
+@media (max-width: 700px) {
+  .schedule-live-panel {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .schedule-clock {
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+  }
+}
+
+/* 작은 모바일: 상태 패널 여백 축소 */
+@media (max-width: 480px) {
+  .schedule-live-panel {
+    padding: 19px;
+  }
+}
+
 .table-wrapper {
   overflow-x: auto;
   background: #ffffff;
