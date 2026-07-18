@@ -1182,6 +1182,31 @@ select:focus {
   font-size: clamp(1rem, 1.6vw, 1.12rem);
 }
 
+/* 모바일: 소개 영역 여백을 줄이고 우측 장식이 글자를 가리지 않도록 축소 */
+@media (max-width: 600px) {
+  .page-hero {
+    padding: 38px 24px;
+  }
+
+  .page-hero::before {
+    width: 130px;
+    opacity: 0.25;
+  }
+
+  .page-hero::after {
+    right: 14px;
+    bottom: -62px;
+    width: 120px;
+    height: 120px;
+    opacity: 0.5;
+  }
+
+  .page-hero h1,
+  .page-hero p {
+    max-width: calc(100% - 30px);
+  }
+}
+
 /* ==========================================================================
    프로필 페이지
    ========================================================================== */
@@ -1276,6 +1301,28 @@ select:focus {
 .trait-list dd {
   margin: 0;
   color: #5a606c;
+}
+
+/* 태블릿: 프로필 카드를 2열로 축소 */
+@media (max-width: 900px) {
+  .profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .trait-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 모바일: 프로필 카드를 한 열로 구성 */
+@media (max-width: 620px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card {
+    min-height: auto;
+  }
 }
 
 /* ==========================================================================
