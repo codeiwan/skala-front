@@ -153,10 +153,19 @@ function finishBaseballGame() {
 
   baseballAnswer.textContent = secretDigits.join('');
 
-  baseballCompleteSummary.textContent = `${attemptCount}번의 시도로 숫자 야구 게임을 완료했습니다.`;
+  baseballCompleteSummary.textContent =
+    `${attemptCount}번의 시도로 정답을 맞혔습니다. ` +
+    '새 게임을 누르면 바로 다시 시작할 수 있습니다.';
 
+  /*
+    완료 시 게임 과정과 완료 화면이 동시에 보이지 않도록
+    hidden과 aria-hidden 상태를 함께 변경합니다.
+  */
   baseballGameBoard.hidden = true;
+  baseballGameBoard.setAttribute('aria-hidden', 'true');
+
   baseballComplete.hidden = false;
+  baseballComplete.setAttribute('aria-hidden', 'false');
 
   baseballModalContent.classList.add('is-complete');
 
@@ -202,9 +211,14 @@ function resetBaseballGame() {
   `;
 
   baseballComplete.hidden = true;
+  baseballComplete.setAttribute('aria-hidden', 'true');
+
   baseballGameBoard.hidden = false;
+  baseballGameBoard.setAttribute('aria-hidden', 'false');
 
   baseballModalContent.classList.remove('is-complete');
+
+  baseballHistory.scrollTop = 0;
 
   if (!baseballModal.hidden) {
     baseballInput.focus();
@@ -242,4 +256,7 @@ function addHistoryItem(guessText, result) {
 
   historyItem.append(attemptNumber, guessNumber, resultText);
   baseballHistory.prepend(historyItem);
+
+  // 최근 기록이 항상 바로 보이도록 목록의 맨 위를 유지합니다.
+  baseballHistory.scrollTop = 0;
 }

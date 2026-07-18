@@ -3492,6 +3492,195 @@ input[type="radio"], input[type="checkbox"] {
   }
 }
 
+
+/* --------------------------------------------------------------------------
+   회원가입 실시간 진행 패널
+   -------------------------------------------------------------------------- */
+
+/* 회원가입 페이지에서만 sticky 패널이 뷰포트를 따라가도록 허용 */
+.signup-page-shell {
+  overflow: visible;
+}
+
+.signup-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 310px);
+  gap: 24px;
+  align-items: start;
+}
+
+.signup-progress-panel {
+  position: sticky;
+  top: 100px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-top: 4px solid var(--sk-red);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(16, 17, 20, 0.08);
+}
+
+.signup-progress-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--sk-red);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.signup-progress-panel h2 {
+  margin-bottom: 18px;
+  font-size: 1.22rem;
+}
+
+.signup-progress-summary {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 11px;
+}
+
+.signup-progress-summary strong {
+  color: var(--sk-navy);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.85rem;
+  line-height: 1;
+}
+
+.signup-progress-summary span {
+  color: #5a606c;
+  font-size: 0.76rem;
+  text-align: right;
+}
+
+.signup-progress-track {
+  height: 10px;
+  overflow: hidden;
+  background: #e9ecf1;
+  border-radius: 999px;
+}
+
+.signup-progress-track span {
+  width: 0;
+  height: 100%;
+  display: block;
+  background:
+    linear-gradient(
+      90deg,
+      var(--sk-red),
+      var(--sk-orange)
+    );
+  border-radius: inherit;
+  transition:
+    width 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.signup-progress-track.is-complete span {
+  background:
+    linear-gradient(
+      90deg,
+      var(--sk-teal),
+      #22b8ae
+    );
+}
+
+.signup-check-list {
+  display: grid;
+  gap: 9px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.signup-check-list li {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  padding: 10px;
+  color: #5a606c;
+  background: #f7f8fa;
+  border: 1px solid #e2e5ea;
+  border-radius: 10px;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.signup-check-icon {
+  width: 10px;
+  height: 10px;
+  display: block;
+  justify-self: center;
+  background: #c3c8d0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(195, 200, 208, 0.18);
+  transition:
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.signup-check-list strong,
+.signup-check-list small {
+  display: block;
+}
+
+.signup-check-list strong {
+  color: #252830;
+  font-size: 0.82rem;
+}
+
+.signup-check-list small {
+  margin-top: 1px;
+  color: #777e8a;
+  font-size: 0.68rem;
+}
+
+.signup-check-list li.is-complete {
+  color: var(--sk-teal);
+  background: rgba(0, 154, 147, 0.07);
+  border-color: rgba(0, 154, 147, 0.22);
+}
+
+.signup-check-list li.is-complete .signup-check-icon {
+  background: var(--sk-teal);
+  box-shadow: 0 0 0 4px rgba(0, 154, 147, 0.14);
+  transform: scale(1.08);
+}
+
+.signup-progress-note {
+  margin: 16px 0 0;
+  color: #777e8a;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 980px) {
+  .signup-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .signup-progress-panel {
+    position: static;
+    grid-row: 1;
+  }
+
+  .signup-check-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .signup-check-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ==========================================================================
    회원가입 완료 페이지
    ========================================================================== */
@@ -3539,6 +3728,116 @@ input[type="radio"], input[type="checkbox"] {
   border-radius: 18px;
   font-size: 1.65rem;
   box-shadow: 0 16px 32px rgba(234, 0, 44, 0.2);
+}
+
+
+/* 회원가입 완료 등장 및 축하 효과 */
+.completion-card-animated {
+  opacity: 0;
+  transform: translateY(18px) scale(0.985);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.completion-card-animated.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.completion-card-animated.is-visible .completion-icon {
+  animation:
+    completion-icon-pop
+    620ms
+    180ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes completion-icon-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.45) rotate(-12deg);
+  }
+
+  70% {
+    transform: scale(1.12) rotate(3deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.completion-confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.completion-confetti-piece {
+  position: absolute;
+  top: -18px;
+  left: var(--confetti-left);
+  width: 8px;
+  height: 14px;
+  background: var(--sk-red);
+  border-radius: 2px;
+  opacity: 0;
+  animation:
+    completion-confetti-fall
+    var(--confetti-duration)
+    var(--confetti-delay)
+    cubic-bezier(0.18, 0.72, 0.28, 1)
+    forwards;
+}
+
+.completion-confetti-piece[data-color="1"] {
+  background: var(--sk-orange);
+}
+
+.completion-confetti-piece[data-color="2"] {
+  background: var(--sk-navy);
+}
+
+.completion-confetti-piece[data-color="3"] {
+  background: var(--sk-teal);
+}
+
+@keyframes completion-confetti-fall {
+  0% {
+    opacity: 0;
+    transform:
+      translateY(-10px)
+      rotate(0);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translateY(520px)
+      rotate(var(--confetti-rotate));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .completion-card-animated {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .completion-card-animated.is-visible .completion-icon,
+  .completion-confetti-piece {
+    animation: none;
+  }
 }
 
 .info-list {
@@ -4074,6 +4373,154 @@ input[type="radio"], input[type="checkbox"] {
   }
 }
 
+
+
+/* --------------------------------------------------------------------------
+   숫자 야구 모달 안정화
+   -------------------------------------------------------------------------- */
+
+/*
+  모달 자체는 고정된 높이를 유지하고,
+  시도 기록 목록만 내부에서 스크롤되게 합니다.
+*/
+.baseball-modal-content {
+  height: min(700px, calc(100dvh - 40px));
+  max-height: calc(100dvh - 40px);
+}
+
+.baseball-game-board {
+  min-height: 0;
+  grid-template-columns: minmax(0, 1.12fr) minmax(220px, 0.88fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.baseball-game-board[hidden],
+.baseball-complete[hidden] {
+  display: none !important;
+}
+
+.baseball-rule-box {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.baseball-scoreboard {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.baseball-form {
+  grid-column: 1;
+  grid-row: 3;
+  align-self: start;
+}
+
+.baseball-history-section {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  grid-column: 2;
+  grid-row: 1 / 4;
+  padding: 16px;
+  background: #f7f8fa;
+  border: 1px solid #e2e5ea;
+  border-radius: 12px;
+}
+
+.baseball-history-heading {
+  flex: 0 0 auto;
+  margin-bottom: 10px;
+}
+
+.baseball-history-heading h3 {
+  margin-bottom: 2px;
+}
+
+.baseball-history-heading span {
+  color: #777e8a;
+  font-size: 0.72rem;
+}
+
+.baseball-history {
+  min-height: 0;
+  max-height: none;
+  flex: 1;
+  padding-right: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(234, 0, 44, 0.38) transparent;
+}
+
+.baseball-history::-webkit-scrollbar {
+  width: 7px;
+}
+
+.baseball-history::-webkit-scrollbar-thumb {
+  background: rgba(234, 0, 44, 0.34);
+  border-radius: 999px;
+}
+
+.baseball-history li {
+  padding: 10px 11px;
+}
+
+.baseball-complete {
+  min-height: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.baseball-modal-content.is-complete .game-modal-header {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 700px) {
+  .baseball-modal-content {
+    height: calc(100dvh - 24px);
+  }
+
+  .baseball-game-board {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto minmax(150px, 1fr);
+    overflow: hidden;
+  }
+
+  .baseball-rule-box,
+  .baseball-scoreboard,
+  .baseball-form,
+  .baseball-history-section {
+    grid-column: 1;
+  }
+
+  .baseball-rule-box {
+    grid-row: 1;
+  }
+
+  .baseball-scoreboard {
+    grid-row: 2;
+  }
+
+  .baseball-form {
+    grid-row: 3;
+  }
+
+  .baseball-history-section {
+    grid-row: 4;
+  }
+
+  .baseball-rule-box ul {
+    display: none;
+  }
+
+  .baseball-rule-box strong::after {
+    content: " · 숫자와 위치가 같으면 S, 숫자만 같으면 B";
+    color: #5a606c;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+}
 
 /* --------------------------------------------------------------------------
    자바스크립트 천국 공통 입력·결과 모달
