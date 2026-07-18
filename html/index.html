@@ -129,21 +129,21 @@
               </div>
             </div>
 
-            <p class="location-note">기본 안내 위치 · 광주광역시 광산구</p>
+            <p class="location-note">도시 이름을 검색하거나 현재 위치로 조회하세요.</p>
 
-            <div class="weather-control">
-              <label for="city-select">날씨를 확인할 도시</label>
-              <select name="city" id="city-select">
-                <option value="none" disabled selected>도시를 선택하세요</option>
-                <option value="current">현재 위치</option>
-                <option value="37.56,126.97">대한민국 서울</option>
-                <option value="35.67,139.65">일본 도쿄</option>
-                <option value="48.85,2.35">프랑스 파리</option>
-              </select>
+            <div class="weather-actions">
+              <button type="button" id="open-city-search" class="weather-action-button weather-action-primary">
+                도시 검색
+              </button>
+              <button type="button" id="current-location-button" class="weather-action-button weather-action-secondary">
+                현재 위치
+              </button>
             </div>
 
             <div id="weather-box">
-              <div class="weather-placeholder">도시를 선택하면 현재 기온과 습도를 표시합니다.</div>
+              <div class="weather-placeholder">
+                도시를 검색하면 위도, 경도, 현재 기온과 습도를 표시합니다.
+              </div>
             </div>
           </section>
 
@@ -176,6 +176,97 @@
     </div>
   </div>
 
+
+  <!-- 도시 검색 모달 -->
+  <dialog id="weather-search-dialog" class="weather-search-dialog" aria-labelledby="weather-search-title">
+    <div class="weather-search-modal">
+      <header class="weather-search-header">
+        <div>
+          <span class="eyebrow">City Search</span>
+          <h2 id="weather-search-title">세계 도시 날씨 검색</h2>
+          <p>도시를 검색한 뒤 원하는 지역을 선택하세요.</p>
+        </div>
+        <button type="button" id="close-city-search" class="weather-search-close" aria-label="도시 검색 닫기">×</button>
+      </header>
+
+      <form id="city-search-form" class="city-search-form">
+        <label for="city-search-input">도시 또는 지역 이름</label>
+        <div class="city-search-input-row">
+          <input
+            type="search"
+            id="city-search-input"
+            name="cityName"
+            minlength="2"
+            autocomplete="off"
+            placeholder="예: 광주, 부산, London"
+            required
+          >
+          <button type="submit" id="city-search-submit">검색</button>
+        </div>
+        <p class="city-search-help">두 글자 이상 입력하세요. 검색 결과에서 국가와 지역을 함께 확인할 수 있습니다.</p>
+      </form>
+
+      <div id="city-search-results" class="city-search-results" aria-live="polite">
+        <div class="city-search-state">검색어를 입력하면 일치하는 도시가 표시됩니다.</div>
+      </div>
+    </div>
+  </dialog>
+
+
+  <!-- 자바스크립트 천국 공통 입력·결과 모달 -->
+  <div id="utility-modal" class="game-modal" hidden>
+    <button
+      type="button"
+      class="game-modal-backdrop"
+      data-utility-close
+      aria-label="모달 닫기"
+    ></button>
+
+    <section
+      class="game-modal-content utility-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="utility-modal-title"
+    >
+      <div class="game-modal-header">
+        <div>
+          <span class="eyebrow">JavaScript Lab</span>
+          <h2 id="utility-modal-title">기능 실행</h2>
+          <p id="utility-modal-description">내용을 확인해 주세요.</p>
+        </div>
+
+        <button
+          type="button"
+          class="utility-modal-close"
+          data-utility-close
+          aria-label="모달 닫기"
+        >
+          ×
+        </button>
+      </div>
+
+      <div id="utility-modal-body" class="utility-modal-body"></div>
+
+      <div class="game-modal-footer">
+        <button
+          type="button"
+          id="utility-modal-cancel"
+          class="btn-reset"
+        >
+          취소
+        </button>
+
+        <button
+          type="button"
+          id="utility-modal-confirm"
+          class="btn-submit"
+        >
+          확인
+        </button>
+      </div>
+    </section>
+  </div>
+
   <div id="stork-game-modal" class="game-modal" hidden>
     <button type="button" class="game-modal-backdrop" onclick="closeStorkGame()"></button>
     <div class="game-modal-content">
@@ -196,6 +287,7 @@
   </div>
 
   <script type="module" src="../script/realtimeInfo.js"></script>
+  <script src="../script/uiModal.js"></script>
   <script src="../script/upDown.js"></script>
   <script src="../script/grade.js"></script>
   <script src="../script/bag.js"></script>

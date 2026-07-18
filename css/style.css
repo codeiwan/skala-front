@@ -958,15 +958,7 @@ main, aside {
   font-size: 0.88rem;
 }
 
-.weather-control label {
-  display: block;
-  margin-bottom: 8px;
-  color: #252830;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
-
-#city-select, select {
+select {
   width: 100%;
   min-height: 48px;
   padding: 11px 42px 11px 13px;
@@ -977,12 +969,10 @@ main, aside {
   transition: border-color 200ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-#city-select:hover,
 select:hover {
   border-color: #aeb4bf;
 }
 
-#city-select:focus,
 select:focus {
   border-color: var(--sk-red);
   box-shadow: 0 0 0 4px rgba(234, 0, 44, 0.1);
@@ -1076,6 +1066,353 @@ select:focus {
   font-weight: 800;
 }
 
+
+
+/* --------------------------------------------------------------------------
+   도시 검색 버튼
+   -------------------------------------------------------------------------- */
+
+.weather-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.weather-action-button {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 14px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 700;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.weather-action-button:hover {
+  transform: translateY(-2px);
+}
+
+.weather-action-button:disabled {
+  cursor: wait;
+  opacity: 0.58;
+  transform: none;
+}
+
+.weather-action-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--sk-red), var(--sk-red-dark));
+  box-shadow: 0 9px 20px rgba(234, 0, 44, 0.18);
+}
+
+.weather-action-primary:hover {
+  color: #ffffff;
+  box-shadow: 0 12px 26px rgba(234, 0, 44, 0.24);
+}
+
+.weather-action-secondary {
+  color: #252830;
+  background: #ffffff;
+  border-color: #cfd3da;
+}
+
+.weather-action-secondary:hover {
+  color: var(--sk-red);
+  background: var(--sk-red-soft);
+  border-color: rgba(234, 0, 44, 0.28);
+}
+
+/* 날씨 결과에 검색한 도시의 국가·행정구역 표시 */
+.weather-card-region {
+  margin: -8px 0 3px;
+  color: #3b3f49;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   도시 검색 모달
+   -------------------------------------------------------------------------- */
+
+.weather-search-dialog {
+  width: min(680px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-radius: 22px;
+  box-shadow: 0 34px 100px rgba(16, 17, 20, 0.28);
+}
+
+.weather-search-dialog::backdrop {
+  background: rgba(10, 12, 17, 0.72);
+  backdrop-filter: blur(7px);
+}
+
+.weather-search-dialog[open] {
+  animation: weather-dialog-open 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes weather-dialog-open {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.weather-search-modal {
+  max-height: calc(100dvh - 32px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #ffffff;
+  border-top: 5px solid var(--sk-red);
+  border-radius: 22px;
+}
+
+.weather-search-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 26px 26px 20px;
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.weather-search-header .eyebrow {
+  margin-bottom: 9px;
+}
+
+.weather-search-header h2 {
+  margin-bottom: 7px;
+  font-size: clamp(1.45rem, 3vw, 2rem);
+}
+
+.weather-search-header p {
+  margin-bottom: 0;
+  color: #5a606c;
+}
+
+.weather-search-close {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  padding: 0;
+  color: #3b3f49;
+  background: #f1f3f6;
+  border: 0;
+  border-radius: 50%;
+  font-size: 1.55rem;
+  line-height: 1;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.weather-search-close:hover {
+  color: #ffffff;
+  background: var(--sk-red);
+  transform: rotate(6deg);
+}
+
+.city-search-form {
+  padding: 22px 26px 18px;
+  background: #f7f8fa;
+  border-bottom: 1px solid #e2e5ea;
+}
+
+.city-search-form label {
+  display: block;
+  margin-bottom: 8px;
+  color: #252830;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.city-search-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+#city-search-input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1px solid #cfd3da;
+  border-radius: 10px;
+  outline: 0;
+  transition:
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#city-search-input:focus {
+  border-color: var(--sk-red);
+  box-shadow: 0 0 0 4px rgba(234, 0, 44, 0.1);
+}
+
+#city-search-submit {
+  min-width: 92px;
+  min-height: 50px;
+  padding: 11px 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--sk-red), var(--sk-red-dark));
+  border: 0;
+  border-radius: 10px;
+  font-weight: 800;
+}
+
+#city-search-submit:hover {
+  background: linear-gradient(135deg, var(--sk-red-dark), #b60022);
+}
+
+#city-search-submit:disabled {
+  cursor: wait;
+  opacity: 0.58;
+}
+
+.city-search-help {
+  margin: 9px 0 0;
+  color: #777e8a;
+  font-size: 0.78rem;
+}
+
+.city-search-results {
+  min-height: 180px;
+  padding: 18px 26px 26px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.city-search-state {
+  min-height: 142px;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  color: #5a606c;
+  background: #f7f8fa;
+  border: 1px dashed #cfd3da;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.city-search-state.is-loading {
+  position: relative;
+  padding-top: 62px;
+}
+
+.city-search-state.is-loading::before {
+  position: absolute;
+  top: 30px;
+  width: 22px;
+  height: 22px;
+  content: "";
+  border: 3px solid #cfd3da;
+  border-top-color: var(--sk-red);
+  border-radius: 50%;
+  animation: weather-spin 0.8s linear infinite;
+}
+
+.city-search-state.is-error {
+  color: #9e1c34;
+  background: var(--sk-red-soft);
+  border-color: rgba(234, 0, 44, 0.2);
+}
+
+.city-search-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.city-search-result {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: center;
+  padding: 15px 16px;
+  color: #17191e;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 12px;
+  text-align: left;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.city-search-result:hover,
+.city-search-result:focus-visible {
+  color: var(--sk-red);
+  background: var(--sk-red-soft);
+  border-color: rgba(234, 0, 44, 0.24);
+  box-shadow: 0 9px 24px rgba(16, 17, 20, 0.07);
+  transform: translateY(-2px);
+}
+
+.city-result-copy {
+  min-width: 0;
+}
+
+.city-result-name,
+.city-result-region,
+.city-result-coordinates {
+  display: block;
+}
+
+.city-result-name {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.city-result-region {
+  margin-top: 3px;
+  overflow: hidden;
+  color: #5a606c;
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.city-result-coordinates {
+  color: var(--sk-navy);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.city-search-result::after {
+  content: "→";
+  color: var(--sk-orange);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+
 .game-area {
   display: grid;
   gap: 16px;
@@ -1122,8 +1459,43 @@ select:focus {
   }
 
   .weather-values,
+  .weather-actions,
   .game-buttons {
     grid-template-columns: 1fr;
+  }
+
+  .weather-search-dialog {
+    width: calc(100% - 20px);
+    max-height: calc(100dvh - 20px);
+  }
+
+  .weather-search-modal {
+    max-height: calc(100dvh - 20px);
+    border-radius: 16px;
+  }
+
+  .weather-search-header,
+  .city-search-form,
+  .city-search-results {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .city-search-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  #city-search-submit {
+    width: 100%;
+  }
+
+  .city-search-result {
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+  }
+
+  .city-result-coordinates {
+    display: none;
   }
 
   .notice-card {
@@ -2235,6 +2607,110 @@ input[type="radio"], input[type="checkbox"] {
   .game-modal-footer .btn-submit,
   .game-modal-footer .btn-reset {
     width: 100%;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   자바스크립트 천국 공통 입력·결과 모달
+   -------------------------------------------------------------------------- */
+
+.utility-modal-content {
+  width: min(520px, 96vw);
+}
+
+.utility-modal-close {
+  width: 42px;
+  height: 42px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  padding: 0;
+  color: #3b3f49;
+  background: #f1f3f6;
+  border: 0;
+  border-radius: 50%;
+  font-size: 1.55rem;
+  line-height: 1;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.utility-modal-close:hover {
+  color: #ffffff;
+  background: var(--sk-red);
+  transform: rotate(6deg);
+}
+
+.utility-modal-body {
+  min-height: 128px;
+  padding: 22px;
+  overflow-y: auto;
+  color: #3b3f49;
+  background: #f7f8fa;
+  border: 1px solid #e2e5ea;
+  border-radius: 14px;
+}
+
+.utility-modal-field {
+  display: grid;
+  gap: 8px;
+}
+
+.utility-modal-field label {
+  color: #252830;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.utility-modal-field input {
+  width: 100%;
+  min-height: 50px;
+  padding: 12px 14px;
+  background: #ffffff;
+  border: 1px solid #cfd3da;
+  border-radius: 10px;
+}
+
+.utility-modal-field input:focus {
+  border-color: var(--sk-red);
+  box-shadow: 0 0 0 4px rgba(234, 0, 44, 0.1);
+  outline: 0;
+}
+
+.utility-modal-help,
+.utility-modal-error {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.utility-modal-help {
+  color: #777e8a;
+}
+
+.utility-modal-error {
+  min-height: 1.4em;
+  color: var(--sk-red);
+  font-weight: 700;
+}
+
+.utility-modal-message {
+  margin: 0;
+  color: #3b3f49;
+  line-height: 1.8;
+  white-space: pre-line;
+}
+
+@media (max-width: 560px) {
+  .utility-modal-content {
+    width: min(100%, 96vw);
+  }
+
+  .utility-modal-body {
+    min-height: 110px;
+    padding: 18px;
   }
 }
 
