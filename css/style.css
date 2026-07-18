@@ -1702,25 +1702,6 @@ input[type="radio"], input[type="checkbox"] {
   color: #5a606c;
 }
 
-.game-modal-close {
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  flex: 0 0 auto;
-  color: #3b3f49;
-  background: #f1f3f6;
-  border: 0;
-  border-radius: 50%;
-  font-size: 1.55rem;
-  line-height: 1;
-  transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1), background 200ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.game-modal-close:hover {
-  color: #ffffff;
-  background: var(--sk-red);
-}
-
 .game-player {
   width: 100%;
   max-height: calc(100vh - 250px);
