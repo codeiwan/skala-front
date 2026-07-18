@@ -44,12 +44,69 @@
               <h2>기억에 남은 여행지</h2>
               <p>각 사진에 마우스를 올리면 이미지가 자연스럽게 확대됩니다.</p>
             </div>
-            <div class="audio-card">
-              <span class="media-label">Travel Soundtrack</span>
-              <audio controls preload="metadata">
+            <div class="audio-card media-player" data-media-player="audio">
+              <div class="media-player-heading">
+                <div>
+                  <span class="media-label">Travel Soundtrack</span>
+                  <strong class="media-title">여행의 순간을 위한 배경음악</strong>
+                </div>
+
+                <span class="media-status" data-media-status>READY</span>
+              </div>
+
+              <!--
+                JavaScript가 실행되지 않는 환경에서는
+                브라우저 기본 controls를 그대로 사용할 수 있습니다.
+              -->
+              <audio id="travel-audio" controls preload="metadata">
                 <source src="../media/music.mp3" type="audio/mpeg">
                 브라우저가 오디오 요소를 지원하지 않습니다.
               </audio>
+
+              <div class="audio-player-surface">
+                <div class="media-wave" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </div>
+
+                <div class="custom-media-controls audio-custom-controls">
+                  <button
+                    type="button"
+                    class="media-control-button media-play-button"
+                    data-action="play"
+                    aria-label="음악 재생"
+                  >
+                    ▶
+                  </button>
+
+                  <span class="media-time" data-current-time>0:00</span>
+
+                  <input
+                    type="range"
+                    class="media-progress"
+                    data-progress
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                    aria-label="음악 재생 위치"
+                  >
+
+                  <span class="media-time" data-duration>0:00</span>
+
+                  <button
+                    type="button"
+                    class="media-control-button media-mute-button"
+                    data-action="mute"
+                    aria-label="음악 음소거"
+                  >
+                    🔊
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -76,15 +133,87 @@
               <h2>여행 브이로그</h2>
             </div>
           </div>
-          <article class="vlog-card">
-            <video controls preload="metadata">
-              <source src="../media/video.mp4" type="video/mp4">
-              브라우저가 비디오 요소를 지원하지 않습니다.
-            </video>
+          <article class="vlog-card media-player" data-media-player="video">
+            <div class="video-stage">
+              <!--
+                playsinline을 사용해 모바일에서도 페이지 안에서 재생합니다.
+                JavaScript가 실패하면 기본 controls를 사용할 수 있습니다.
+              -->
+              <video id="travel-video" controls preload="metadata" playsinline>
+                <source src="../media/video.mp4" type="video/mp4">
+                브라우저가 비디오 요소를 지원하지 않습니다.
+              </video>
+
+              <div class="video-player-topbar">
+                <span>TRAVEL VLOG · OSAKA</span>
+                <span class="media-status" data-media-status>READY</span>
+              </div>
+
+              <button
+                type="button"
+                class="video-center-play"
+                data-action="play"
+                aria-label="여행 영상 재생"
+              >
+                <span aria-hidden="true">▶</span>
+              </button>
+
+              <div class="video-control-panel">
+                <input
+                  type="range"
+                  class="media-progress video-progress"
+                  data-progress
+                  min="0"
+                  max="100"
+                  value="0"
+                  step="0.1"
+                  aria-label="영상 재생 위치"
+                >
+
+                <div class="video-control-row">
+                  <button
+                    type="button"
+                    class="media-control-button media-play-button"
+                    data-action="play"
+                    aria-label="영상 재생"
+                  >
+                    ▶
+                  </button>
+
+                  <span class="video-time-group">
+                    <span class="media-time" data-current-time>0:00</span>
+                    <span aria-hidden="true">/</span>
+                    <span class="media-time" data-duration>0:00</span>
+                  </span>
+
+                  <span class="video-control-spacer"></span>
+
+                  <button
+                    type="button"
+                    class="media-control-button media-mute-button"
+                    data-action="mute"
+                    aria-label="영상 음소거"
+                  >
+                    🔊
+                  </button>
+
+                  <button
+                    type="button"
+                    class="media-control-button"
+                    data-action="fullscreen"
+                    aria-label="영상 전체화면"
+                  >
+                    ⛶
+                  </button>
+                </div>
+              </div>
+            </div>
+
             <div class="vlog-caption">
               <span class="badge">VIDEO ARCHIVE</span>
               <h3>오사카 현지의 타코야키</h3>
               <p>혼케 오타코 도톤보리 본점에서 타코야키를 맛보았습니다.</p>
+
             </div>
           </article>
         </section>
@@ -98,5 +227,6 @@
       </footer>
     </div>
   </div>
+  <script src="../script/travelMedia.js"></script>
 </body>
 </html>
