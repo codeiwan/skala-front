@@ -134,7 +134,7 @@ citySelect.addEventListener('change', async function () {
 
     // API 응답을 기다리는 동안 로딩 상태를 표시합니다.
     showMessage(
-      `${displayName} 날씨를 불러오는 중입니다. ⏳`,
+      `${displayName} 날씨를 불러오는 중입니다.`,
       'weather-loading'
     );
 

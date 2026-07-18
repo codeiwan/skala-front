@@ -795,7 +795,13 @@ select:focus {
   border: 3px solid #cfd3da;
   border-top-color: var(--sk-red);
   border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+  animation: weather-spin 0.8s linear infinite;
+}
+
+@keyframes weather-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .weather-error {
