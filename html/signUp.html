@@ -36,25 +36,25 @@
       </header>
 
       <main class="page-content">
-        <form action="signUpResult.html" method="get">
+        <form class="signup-form" action="signUpResult.html" method="get">
           <fieldset>
             <legend>01. 계정 정보</legend>
-            <div>
-              <div>
-                <label for="userId">아이디 <span>*</span></label>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="userId">아이디 <span class="required-mark">*</span></label>
                 <input type="text" id="userId" name="userId" minlength="4" maxlength="20" required placeholder="4~20자 사이의 아이디">
-                <small>영문과 숫자를 조합해 4자 이상 입력하세요.</small>
+                <small class="field-help">영문과 숫자를 조합해 4자 이상 입력하세요.</small>
               </div>
 
-              <div>
-                <label for="userPw">비밀번호 <span>*</span></label>
+              <div class="form-field">
+                <label for="userPw">비밀번호 <span class="required-mark">*</span></label>
                 <input type="password" id="userPw" name="userPw" minlength="8" required placeholder="8자 이상 입력">
-                <small>영문, 숫자, 특수문자를 조합해 8자 이상 입력하세요.</small>
+                <small class="field-help">영문, 숫자, 특수문자를 조합해 8자 이상 입력하세요.</small>
               </div>
 
-              <div>
-                <label for="userEmail">이메일 <span>*</span></label>
-                <div>
+              <div class="form-field form-field-full">
+                <label for="userEmail">이메일 <span class="required-mark">*</span></label>
+                <div class="email-field">
                   <input type="text" id="userEmail" name="userEmail" required placeholder="example">
                   <span>@</span>
                   <select name="userEmailDomain" id="userEmailDomain" required>
@@ -71,36 +71,36 @@
 
           <fieldset>
             <legend>02. 개인 프로필 정보</legend>
-            <div>
-              <div>
-                <label for="userName">이름 <span>*</span></label>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="userName">이름 <span class="required-mark">*</span></label>
                 <input type="text" id="userName" name="userName" required>
               </div>
-              <div>
+              <div class="form-field">
                 <label for="userBirth">생년월일</label>
                 <input type="date" id="userBirth" name="userBirth">
               </div>
 
-              <div>
+              <div class="form-field form-field-full">
                 <span>성별</span>
-                <div>
-                  <label><input type="radio" name="gender" value="male"> 남성</label>
-                  <label><input type="radio" name="gender" value="female"> 여성</label>
-                  <label><input type="radio" name="gender" value="none" checked> 선택 안 함</label>
+                <div class="option-grid">
+                  <label class="option-card"><input type="radio" name="gender" value="male"> 남성</label>
+                  <label class="option-card"><input type="radio" name="gender" value="female"> 여성</label>
+                  <label class="option-card"><input type="radio" name="gender" value="none" checked> 선택 안 함</label>
                 </div>
               </div>
 
-              <div>
+              <div class="form-field form-field-full">
                 <span>관심 분야 <small class="muted">중복 선택 가능</small></span>
-                <div>
-                  <label><input type="checkbox" name="interest" value="frontend"> 웹 프론트엔드</label>
-                  <label><input type="checkbox" name="interest" value="uiux"> UI/UX 디자인</label>
-                  <label><input type="checkbox" name="interest" value="backend"> 백엔드 &amp; 데이터베이스</label>
-                  <label><input type="checkbox" name="interest" value="devops"> 클라우드 &amp; 인프라</label>
+                <div class="option-grid">
+                  <label class="option-card"><input type="checkbox" name="interest" value="frontend"> 웹 프론트엔드</label>
+                  <label class="option-card"><input type="checkbox" name="interest" value="uiux"> UI/UX 디자인</label>
+                  <label class="option-card"><input type="checkbox" name="interest" value="backend"> 백엔드 &amp; 데이터베이스</label>
+                  <label class="option-card"><input type="checkbox" name="interest" value="devops"> 클라우드 &amp; 인프라</label>
                 </div>
               </div>
 
-              <div>
+              <div class="form-field form-field-full">
                 <label for="joinPath">가입 경로</label>
                 <select id="joinPath" name="joinPath">
                   <option value="" disabled selected>선택해 주세요</option>
@@ -115,23 +115,23 @@
 
           <fieldset>
             <legend>03. 자기소개</legend>
-            <div>
+            <div class="form-field">
               <label for="intro">나를 표현하는 한 줄 소개 또는 가입 인사</label>
               <textarea id="intro" name="intro" maxlength="200" placeholder="최대 200자까지 입력할 수 있습니다."></textarea>
-              <small>관심 기술, 목표, 참여하고 싶은 활동 등을 자유롭게 작성하세요.</small>
+              <small class="field-help">관심 기술, 목표, 참여하고 싶은 활동 등을 자유롭게 작성하세요.</small>
             </div>
           </fieldset>
 
           <fieldset>
             <legend>04. 약관 동의</legend>
-            <div>
-              <label><input type="checkbox" name="terms" required> <strong>[필수]</strong> 이용약관에 동의합니다.</label>
-              <label><input type="checkbox" name="privacy" required> <strong>[필수]</strong> 개인정보 처리방침에 동의합니다.</label>
-              <label><input type="checkbox" name="marketing"> [선택] 마케팅 정보 수신에 동의합니다.</label>
+            <div class="terms-list">
+              <label class="option-card"><input type="checkbox" name="terms" required> <strong>[필수]</strong> 이용약관에 동의합니다.</label>
+              <label class="option-card"><input type="checkbox" name="privacy" required> <strong>[필수]</strong> 개인정보 처리방침에 동의합니다.</label>
+              <label class="option-card"><input type="checkbox" name="marketing"> [선택] 마케팅 정보 수신에 동의합니다.</label>
             </div>
           </fieldset>
 
-          <div>
+          <div class="form-actions">
             <button type="reset" class="btn-reset">다시 작성</button>
             <button type="submit" class="btn-submit">동의하고 회원가입</button>
           </div>
@@ -141,7 +141,7 @@
       <footer class="site-footer">
         <div class="site-footer-inner">
           <p><small>&copy; 2026 박이완의 유니버스.</small></p>
-          <span>Sign Up</span>
+          <span class="footer-mark">Sign Up</span>
         </div>
       </footer>
     </div>

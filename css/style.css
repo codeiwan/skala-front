@@ -1367,6 +1367,147 @@ tbody td[rowspan] {
 }
 
 /* ==========================================================================
+   회원가입 및 공통 입력 양식
+   ========================================================================== */
+
+.signup-form {
+  display: grid;
+  gap: 22px;
+}
+
+fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 16px;
+}
+
+legend {
+  padding: 0 10px;
+  color: #101114;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-field {
+  min-width: 0;
+}
+
+.form-field-full {
+  grid-column: 1 / -1;
+}
+
+.form-field > label, .field-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #252830;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.required-mark {
+  color: var(--sk-red);
+}
+
+.field-help {
+  display: block;
+  margin-top: 6px;
+  color: #777e8a;
+  font-size: 0.78rem;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="date"],
+textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 11px 13px;
+  background: #ffffff;
+  border: 1px solid #cfd3da;
+  border-radius: 10px;
+  transition: border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+input:hover, textarea:hover {
+  border-color: #aeb4bf;
+}
+
+input:focus, textarea:focus {
+  background: #ffffff;
+  border-color: var(--sk-red);
+  box-shadow: 0 0 0 4px rgba(234, 0, 44, 0.1);
+  outline: 0;
+}
+
+.email-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(150px, 0.75fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.option-card {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 13px;
+  color: #3b3f49;
+  background: #f7f8fa;
+  border: 1px solid #e2e5ea;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.option-card:hover {
+  color: var(--sk-red);
+  background: var(--sk-red-soft);
+  border-color: rgba(234, 0, 44, 0.2);
+}
+
+input[type="radio"], input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  accent-color: var(--sk-red);
+}
+
+.terms-list {
+  display: grid;
+  gap: 10px;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ==========================================================================
    공통 푸터
    ========================================================================== */
 
