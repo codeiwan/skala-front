@@ -965,6 +965,81 @@ select:focus {
 }
 
 /* ==========================================================================
+   휴일 일정 타임라인
+   ========================================================================== */
+
+.day-sections {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.day-card {
+  position: relative;
+  padding: 28px;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 16px;
+}
+
+.day-card::before {
+  position: absolute;
+  top: 0;
+  left: 28px;
+  width: 58px;
+  height: 4px;
+  content: "";
+  background: var(--sk-red);
+}
+
+.day-card:nth-child(2)::before {
+  background: var(--sk-orange);
+}
+
+.day-card:nth-child(3)::before {
+  background: var(--sk-navy);
+}
+
+.day-card h2 {
+  margin-top: 12px;
+  font-size: 1.3rem;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.schedule-list li {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.schedule-list time {
+  color: var(--sk-red);
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.schedule-list span {
+  color: #3b3f49;
+}
+
+.date-note {
+  margin-top: 24px;
+  margin-bottom: 0;
+  color: #777e8a;
+  font-size: 0.88rem;
+  text-align: right;
+}
+
+/* ==========================================================================
    강의 시간표
    ========================================================================== */
 
