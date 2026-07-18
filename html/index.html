@@ -36,7 +36,7 @@
           <h1>배움과 경험을 연결하는<br><strong>박이완의 유니버스</strong></h1>
           <p>프로필과 학습과 여행 기록을 한눈에 볼 수 있는 웹 허브입니다.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#main-content">최근 업데이트 보기</a>
+            <a class="button button-primary" href="#main-content">실시간 정보 보기</a>
             <a class="button button-secondary" href="myProfile.html">프로필 살펴보기</a>
           </div>
         </div>
@@ -100,23 +100,90 @@
 
       <div class="dashboard-layout">
         <main id="main-content">
-          <section class="panel panel-emphasis">
+          <section class="panel panel-emphasis live-info-panel">
             <div class="section-heading">
               <div>
-                <span class="eyebrow">Latest Update</span>
-                <h2>오늘의 주요 소식</h2>
+                <span class="eyebrow">Live Exchange</span>
+                <h2>한국 원화 환율 대시보드</h2>
               </div>
-              <span class="badge">NEW</span>
+              <p>미국 달러, 일본 엔, 유로의 최신 기준환율과 원화 환산 결과를 확인하세요.</p>
             </div>
 
-            <article class="notice-card">
-              <h3>여행 앨범에 동영상을 추가했습니다</h3>
-              <p>홋카이도 대설산 기록 아래에 브이로그 영상을 추가했습니다. 이제 사진뿐 아니라 소리와 영상으로도 여행을 다시 감상할 수 있습니다.</p>
-              <div class="notice-meta">
-                <span>여행 앨범 업데이트</span>
-                <span>작성일 <time datetime="2026-07-15">2026년 7월 15일</time></span>
+            <div class="exchange-toolbar">
+              <p id="exchange-status" class="exchange-status" aria-live="polite">
+                최신 환율 정보를 불러오는 중입니다.
+              </p>
+              <button type="button" id="exchange-refresh" class="exchange-refresh-button">
+                새로고침
+              </button>
+            </div>
+
+            <div id="exchange-grid" class="exchange-grid" aria-live="polite">
+              <article class="exchange-card">
+                <div class="exchange-card-heading">
+                  <span class="exchange-code">USD</span>
+                  <span class="exchange-name">미국 달러</span>
+                </div>
+                <strong id="exchange-rate-usd" class="exchange-rate">불러오는 중</strong>
+                <span class="exchange-unit">1 USD 기준</span>
+              </article>
+
+              <article class="exchange-card">
+                <div class="exchange-card-heading">
+                  <span class="exchange-code">JPY</span>
+                  <span class="exchange-name">일본 엔</span>
+                </div>
+                <strong id="exchange-rate-jpy" class="exchange-rate">불러오는 중</strong>
+                <span class="exchange-unit">100 JPY 기준</span>
+              </article>
+
+              <article class="exchange-card">
+                <div class="exchange-card-heading">
+                  <span class="exchange-code">EUR</span>
+                  <span class="exchange-name">유럽 유로</span>
+                </div>
+                <strong id="exchange-rate-eur" class="exchange-rate">불러오는 중</strong>
+                <span class="exchange-unit">1 EUR 기준</span>
+              </article>
+            </div>
+
+            <form id="exchange-converter" class="exchange-converter">
+              <div>
+                <span class="exchange-converter-label">간단 원화 환산</span>
+                <p>금액과 통화를 선택하면 현재 기준환율로 계산합니다.</p>
               </div>
-            </article>
+
+              <div class="exchange-converter-controls">
+                <label class="exchange-amount-field">
+                  <span>금액</span>
+                  <input
+                    type="number"
+                    id="exchange-amount"
+                    min="0"
+                    step="0.01"
+                    value="1"
+                    inputmode="decimal"
+                  >
+                </label>
+
+                <label class="exchange-currency-field">
+                  <span>통화</span>
+                  <select id="exchange-currency">
+                    <option value="USD">USD · 미국 달러</option>
+                    <option value="JPY">JPY · 일본 엔</option>
+                    <option value="EUR">EUR · 유럽 유로</option>
+                  </select>
+                </label>
+              </div>
+
+              <output id="exchange-result" class="exchange-result">
+                환율 정보를 불러온 후 계산됩니다.
+              </output>
+            </form>
+
+            <p class="exchange-disclaimer">
+              환율은 실시간 체결가가 아닌 최신 기준환율이며 실제 환전 금액과 차이가 날 수 있습니다.
+            </p>
           </section>
         </main>
 
@@ -286,6 +353,7 @@
     </div>
   </div>
 
+  <script src="../script/exchangeInfo.js"></script>
   <script type="module" src="../script/realtimeInfo.js"></script>
   <script src="../script/uiModal.js"></script>
   <script src="../script/upDown.js"></script>
