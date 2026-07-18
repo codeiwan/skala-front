@@ -33,7 +33,7 @@
         <a class="back-link" href="index.html">← 메인으로 돌아가기</a>
         <span class="eyebrow">Holiday Routine</span>
         <h1>나의 휴일 일과</h1>
-        <p>느긋한 아침부터 차분한 밤까지, 휴일을 보내는 방식을 시간대별로 정리했습니다.</p>
+        <p>주중의 학습 리듬을 잠시 내려놓고, 생활 정리와 취미를 균형 있게 즐기는 휴일 계획입니다.</p>
       </header>
 
       <main class="page-content">
@@ -43,34 +43,74 @@
               <span class="eyebrow">One Day Plan</span>
               <h2>하루의 흐름</h2>
             </div>
-            <p>각 시간대의 핵심 활동을 한눈에 확인할 수 있습니다.</p>
+            <p>휴일 시간대의 활동을 한눈에 확인할 수 있습니다.</p>
           </div>
 
           <div class="day-sections">
-            <article class="day-card">
-              <h2>느긋한 아침</h2>
+            <article class="day-card day-card-morning" data-period="morning">
+              <span class="day-card-status" hidden>NOW</span>
+              <h2>아침 리셋</h2>
               <ul class="schedule-list">
-                <li><time datetime="09:00">09:00</time><span>늦잠 자는 행복</span></li>
-                <li><time datetime="10:00">10:00</time><span>여유 있게 <mark>브런치</mark> 즐기기</span></li>
-                <li><time datetime="11:00">11:00</time><span>커피 한 잔과 음악 감상</span></li>
+                <li>
+                  <time datetime="09:30">09:30</time>
+                  <span>여유 있게 일어나 환기 후 가볍게 스트레칭하기</span>
+                </li>
+                <li>
+                  <time datetime="10:30">10:30</time>
+                  <span>브런치와 아이스 아메리카노를 즐기며 관심 뉴스 확인하기</span>
+                </li>
+                <li>
+                  <time datetime="11:30">11:30</time>
+                  <span>빨래와 방 정리 후 오늘 할 일을 간단히 정리하기</span>
+                </li>
               </ul>
             </article>
 
-            <article class="day-card">
-              <h2>오후 활동</h2>
+            <article class="day-card day-card-afternoon" data-period="afternoon">
+              <span class="day-card-status" hidden>NOW</span>
+              <h2>오후 공부와 게임</h2>
               <ul class="schedule-list">
-                <li><time datetime="13:00">13:00</time><span>공원 산책하며 마음 정리</span></li>
-                <li><time datetime="14:30">14:30</time><span>사진 찍으며 일상의 순간 기록</span></li>
-                <li><time datetime="16:00">16:00</time><span>충동구매 대신 <mark>창의적인 쇼핑</mark></span></li>
+                <li>
+                  <time datetime="13:30">13:30</time>
+                  <span>개인 프로젝트 코드를 정리하고 GitHub에 학습 내용 기록하기</span>
+                </li>
+                <li>
+                  <time datetime="15:30">15:30</time>
+                  <span>
+                    잠시 머리를 식히며
+                    <button
+                      type="button"
+                      class="holiday-game-trigger"
+                      onclick="openStorkGame()"
+                    >
+                      <mark>게임 플레이</mark>
+                    </button>
+                    하기
+                  </span>
+                </li>
+                <li>
+                  <time datetime="17:00">17:00</time>
+                  <span>헬스장에 다녀오거나 동네를 산책하며 저녁 장보기</span>
+                </li>
               </ul>
             </article>
 
-            <article class="day-card">
-              <h2>저녁과 밤</h2>
+            <article class="day-card day-card-night" data-period="night">
+              <span class="day-card-status" hidden>NOW</span>
+              <h2>저녁 휴식</h2>
               <ul class="schedule-list">
-                <li><time datetime="18:00">18:00</time><span>맛있는 저녁 만들기</span></li>
-                <li><time datetime="20:00">20:00</time><span>영화 감상, 코미디 장르 선호</span></li>
-                <li><time datetime="23:00">23:00</time><span>짧은 독서 후 힐링 타임</span></li>
+                <li>
+                  <time datetime="19:00">19:00</time>
+                  <span>간단한 저녁을 만들거나 좋아하는 메뉴를 주문해 식사하기</span>
+                </li>
+                <li>
+                  <time datetime="21:00">21:00</time>
+                  <span>친구들과 게임을 하거나 영화와 유튜브 콘텐츠 감상하기</span>
+                </li>
+                <li>
+                  <time datetime="23:30">23:30</time>
+                  <span>짧게 독서하고 다음 주 일정과 학습 목표를 정리하기</span>
+                </li>
               </ul>
             </article>
           </div>
@@ -86,5 +126,28 @@
       </footer>
     </div>
   </div>
+
+  <div id="stork-game-modal" class="game-modal" hidden>
+    <button type="button" class="game-modal-backdrop" onclick="closeStorkGame()"></button>
+    <div class="game-modal-content">
+      <div class="game-modal-header">
+        <div>
+          <h2>황새 오래걷기</h2>
+          <p>게임 화면을 클릭한 후 스페이스바로 게임을 시작하여 방향키로 조작하세요.</p>
+        </div>
+      </div>
+
+      <div id="stork-game-player" class="game-player"></div>
+
+      <div class="game-modal-footer">
+        <button type="button" class="btn-reset" onclick="restartStorkGame()">다시 시작</button>
+        <button type="button" class="btn-submit" onclick="closeStorkGame()">게임 닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../script/holiday.js"></script>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <script src="../script/swfGame.js"></script>
 </body>
 </html>

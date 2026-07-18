@@ -225,7 +225,7 @@
               <button type="button" class="btn-submit" onclick="startGame()">업다운 게임</button>
               <button type="button" class="btn-submit" onclick="checkGrade()">성적 계산기</button>
               <button type="button" class="btn-submit" onclick="showMyBag()">내 가방 보기</button>
-              <button type="button" class="btn-submit" onclick="openStorkGame()">황새 오래걷기</button>
+              <button type="button" id="open-baseball-game" class="btn-submit">숫자 야구</button>
             </div>
           </section>
         </aside>
@@ -334,32 +334,122 @@
     </section>
   </div>
 
-  <div id="stork-game-modal" class="game-modal" hidden>
-    <button type="button" class="game-modal-backdrop" onclick="closeStorkGame()"></button>
-    <div class="game-modal-content">
+
+  <!-- 숫자 야구 게임 모달 -->
+  <div id="baseball-game-modal" class="game-modal" hidden>
+    <button
+      type="button"
+      class="game-modal-backdrop"
+      id="baseball-modal-backdrop"
+      aria-label="숫자 야구 게임 닫기"
+    ></button>
+
+    <section
+      id="baseball-modal-content"
+      class="game-modal-content baseball-modal-content"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="baseball-game-title"
+    >
       <div class="game-modal-header">
         <div>
-          <h2>황새 오래걷기</h2>
-          <p>게임 화면을 클릭한 후 스페이스바로 게임을 시작하여 방향키로 조작하세요.</p>
+          <span class="eyebrow">Number Baseball</span>
+          <h2 id="baseball-game-title">숫자 야구 게임</h2>
+          <p>1부터 9까지 서로 다른 숫자 세 개를 추리해 보세요.</p>
+        </div>
+
+        <button
+          type="button"
+          id="baseball-modal-close"
+          class="utility-modal-close"
+          aria-label="숫자 야구 게임 닫기"
+        >
+          ×
+        </button>
+      </div>
+
+      <div id="baseball-game-board" class="baseball-game-board">
+        <div class="baseball-rule-box">
+          <strong>게임 규칙</strong>
+          <ul>
+            <li>숫자와 위치가 모두 같으면 스트라이크입니다.</li>
+            <li>숫자는 같지만 위치가 다르면 볼입니다.</li>
+            <li>일치하는 숫자가 하나도 없으면 아웃입니다.</li>
+          </ul>
+        </div>
+
+        <div class="baseball-scoreboard">
+          <span>시도 횟수 <strong id="baseball-attempt-count">0</strong></span>
+          <p id="baseball-status" aria-live="polite">
+            세 자리 숫자를 입력해 첫 번째 추리를 시작하세요.
+          </p>
+        </div>
+
+        <form id="baseball-form" class="baseball-form">
+          <label for="baseball-input">서로 다른 숫자 세 자리</label>
+
+          <div class="baseball-input-row">
+            <input
+              type="text"
+              id="baseball-input"
+              inputmode="numeric"
+              maxlength="3"
+              autocomplete="off"
+              placeholder="예: 379"
+              aria-describedby="baseball-input-help baseball-error"
+            >
+
+            <button type="submit" id="baseball-submit" class="btn-submit">
+              도전
+            </button>
+          </div>
+
+          <p id="baseball-input-help" class="baseball-input-help">
+            0을 제외한 1~9의 숫자를 중복 없이 입력하세요.
+          </p>
+
+          <p id="baseball-error" class="baseball-error" aria-live="polite"></p>
+        </form>
+
+        <div class="baseball-history-section">
+          <h3>시도 기록</h3>
+          <ol id="baseball-history" class="baseball-history">
+            <li class="baseball-history-empty">
+              아직 시도 기록이 없습니다.
+            </li>
+          </ol>
         </div>
       </div>
 
-      <div id="stork-game-player" class="game-player"></div>
+      <!-- 정답을 맞힌 뒤 표시되는 명확한 완료 화면 -->
+      <div id="baseball-complete" class="baseball-complete" hidden>
+        <span class="baseball-complete-icon" aria-hidden="true">✓</span>
+        <span class="eyebrow">Game Complete</span>
+        <h3>정답을 맞혔습니다!</h3>
+
+        <p class="baseball-answer-label">정답 숫자</p>
+        <strong id="baseball-answer" class="baseball-answer"></strong>
+
+        <p id="baseball-complete-summary" class="baseball-complete-summary"></p>
+      </div>
 
       <div class="game-modal-footer">
-        <button type="button" class="btn-reset" onclick="restartStorkGame()">다시 시작</button>
-        <button type="button" class="btn-submit" onclick="closeStorkGame()">게임 닫기</button>
+        <button type="button" id="baseball-restart" class="btn-reset">
+          새 게임
+        </button>
+        <button type="button" id="baseball-close" class="btn-submit">
+          게임 닫기
+        </button>
       </div>
-    </div>
+    </section>
   </div>
 
   <script src="../script/exchangeInfo.js"></script>
   <script type="module" src="../script/realtimeInfo.js"></script>
   <script src="../script/uiModal.js"></script>
+  <script src="../script/baseball.js"></script>
   <script src="../script/upDown.js"></script>
   <script src="../script/grade.js"></script>
   <script src="../script/bag.js"></script>
-  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
-  <script src="../script/swfGame.js"></script>
 </body>
 </html>

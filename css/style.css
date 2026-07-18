@@ -1950,39 +1950,128 @@ select:focus {
 }
 
 .day-card {
+  --holiday-image: none;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
+  min-height: 310px;
   padding: 28px;
   background: #ffffff;
   border: 1px solid #e2e5ea;
   border-radius: 16px;
   transition:
-    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
-    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.day-card:hover {
-  border-color: rgba(234, 0, 44, 0.2);
-  box-shadow: 0 10px 28px rgba(16, 17, 20, 0.07);
-  transform: translateY(-4px);
+/* 시간대별 카드 스타일 */
+.day-card-morning {
+  --holiday-image: url("../media/morning.jpg");
 }
 
+.day-card-afternoon {
+  --holiday-image: url("../media/afternoon.jpg");
+}
+
+.day-card-night {
+  --holiday-image: url("../media/night.jpg");
+}
+
+/* 기존 상단 포인트 선 */
 .day-card::before {
   position: absolute;
   top: 0;
   left: 28px;
+  z-index: 3;
   width: 58px;
   height: 4px;
   content: "";
   background: var(--sk-red);
 }
 
-.day-card:nth-child(2)::before {
+/* 카드 배경 이미지 */
+.day-card::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  content: "";
+  background-image: var(--holiday-image);
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  filter: saturate(0.82) contrast(0.94);
+  transform: scale(1.07);
+  transition:
+    opacity 360ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+/* 텍스트와 버튼을 이미지보다 위에 유지 */
+.day-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.day-card-afternoon::before {
   background: var(--sk-orange);
 }
 
-.day-card:nth-child(3)::before {
+.day-card-night::before {
+  background: var(--sk-navy);
+}
+
+/* 이미지는 hover와 키보드 포커스에서만 매우 희미하게 표시 */
+.day-card:hover::after,
+.day-card:focus-within::after {
+  opacity: 0.14;
+  transform: scale(1);
+}
+
+.day-card:hover,
+.day-card:focus-within {
+  border-color: rgba(234, 0, 44, 0.22);
+  box-shadow: 0 12px 30px rgba(16, 17, 20, 0.09);
+  transform: translateY(-4px);
+}
+
+/* 현재 시간대 자동 강조 */
+.day-card.is-current {
+  border-color: rgba(234, 0, 44, 0.32);
+  box-shadow:
+    0 0 0 3px rgba(234, 0, 44, 0.08),
+    0 12px 30px rgba(16, 17, 20, 0.08);
+}
+
+.day-card.is-current::after {
+  opacity: 0.06;
+}
+
+.day-card.is-current:hover::after,
+.day-card.is-current:focus-within::after {
+  opacity: 0.16;
+}
+
+.day-card-status {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 5px 9px;
+  color: #ffffff;
+  background: var(--sk-red);
+  border-radius: 999px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.day-card-afternoon .day-card-status {
+  background: var(--sk-orange);
+}
+
+.day-card-night .day-card-status {
   background: var(--sk-navy);
 }
 
@@ -2013,8 +2102,51 @@ select:focus {
   font-weight: 800;
 }
 
+.day-card-afternoon .schedule-list time {
+  color: #c65c13;
+}
+
+.day-card-night .schedule-list time {
+  color: var(--sk-navy);
+}
+
 .schedule-list span {
   color: #3b3f49;
+}
+
+/* mark를 실제 실행 가능한 버튼으로 사용 */
+.holiday-game-trigger {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: inherit;
+}
+
+.holiday-game-trigger mark {
+  display: inline-block;
+  padding: 0.08em 0.42em;
+  color: #7f3c0d;
+  background: #fff1bb;
+  border: 1px solid rgba(244, 119, 37, 0.28);
+  border-radius: 5px;
+  font-weight: 800;
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.holiday-game-trigger:hover mark,
+.holiday-game-trigger:focus-visible mark {
+  color: #ffffff;
+  background: var(--sk-orange);
+  box-shadow: 0 6px 16px rgba(244, 119, 37, 0.22);
+  transform: translateY(-1px);
 }
 
 .date-note {
@@ -2032,13 +2164,14 @@ select:focus {
   }
 }
 
-/* 모바일: 휴일 카드를 한 열로 구성하고 시간 열을 축소 */
+/* 모바일: 휴일 카드를 한 열로 구성 */
 @media (max-width: 620px) {
   .day-sections {
     grid-template-columns: 1fr;
   }
 
   .day-card {
+    min-height: 0;
     padding: 24px;
   }
 
@@ -2733,7 +2866,7 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 /* ==========================================================================
-   황새 오래걷기 게임 모달
+   공통 게임 모달
    ========================================================================== */
 
 .game-modal[hidden] {
@@ -2849,6 +2982,299 @@ input[type="radio"], input[type="checkbox"] {
   .game-modal-footer .btn-submit,
   .game-modal-footer .btn-reset {
     width: 100%;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   숫자 야구 게임 모달
+   -------------------------------------------------------------------------- */
+
+.baseball-modal-content {
+  width: min(640px, 96vw);
+}
+
+.baseball-game-board {
+  display: grid;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 3px;
+}
+
+.baseball-rule-box {
+  padding: 16px 18px;
+  color: #3b3f49;
+  background: var(--sk-orange-soft);
+  border-left: 4px solid var(--sk-orange);
+  border-radius: 0 10px 10px 0;
+}
+
+.baseball-rule-box strong {
+  display: block;
+  margin-bottom: 7px;
+  color: #101114;
+}
+
+.baseball-rule-box ul {
+  display: grid;
+  gap: 4px;
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.84rem;
+}
+
+.baseball-scoreboard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  padding: 15px 17px;
+  color: #ffffff;
+  background: var(--sk-navy);
+  border-radius: 12px;
+}
+
+.baseball-scoreboard > span {
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.baseball-scoreboard > span strong {
+  margin-left: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+}
+
+.baseball-scoreboard p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.84rem;
+  text-align: right;
+}
+
+.baseball-form {
+  padding: 18px;
+  background: #f7f8fa;
+  border: 1px solid #e2e5ea;
+  border-radius: 12px;
+}
+
+.baseball-form > label {
+  display: block;
+  margin-bottom: 8px;
+  color: #252830;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.baseball-input-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+#baseball-input {
+  width: 100%;
+  min-height: 50px;
+  padding: 11px 14px;
+  color: #101114;
+  background: #ffffff;
+  border: 1px solid #cfd3da;
+  border-radius: 10px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.08rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+#baseball-input:focus {
+  border-color: var(--sk-red);
+  box-shadow: 0 0 0 4px rgba(234, 0, 44, 0.1);
+  outline: 0;
+}
+
+.baseball-input-help,
+.baseball-error {
+  margin: 8px 0 0;
+  font-size: 0.78rem;
+}
+
+.baseball-input-help {
+  color: #777e8a;
+}
+
+.baseball-error {
+  min-height: 1.4em;
+  color: var(--sk-red);
+  font-weight: 700;
+}
+
+.baseball-history-section h3 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.baseball-history {
+  max-height: 190px;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.baseball-history li {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  padding: 11px 13px;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 9px;
+}
+
+.baseball-history-number {
+  color: #777e8a;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.baseball-history-guess {
+  color: #101114;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.baseball-history-result {
+  color: var(--sk-red);
+  font-size: 0.8rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.baseball-history-empty {
+  display: block !important;
+  color: #777e8a;
+  background: #f7f8fa !important;
+  border-style: dashed !important;
+  text-align: center;
+}
+
+/* 게임 완료 상태에서는 상단 포인트 색상을 성공 색상으로 변경 */
+.baseball-modal-content.is-complete {
+  border-top-color: var(--sk-teal);
+}
+
+/* 숫자 야구 완료 화면 */
+.baseball-complete {
+  min-height: 390px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  padding: 40px 24px;
+  text-align: center;
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(0, 154, 147, 0.16),
+      transparent 48%
+    ),
+    linear-gradient(145deg, #f3fffd, #ffffff);
+  border: 1px solid rgba(0, 154, 147, 0.2);
+  border-radius: 16px;
+}
+
+.baseball-complete[hidden] {
+  display: none;
+}
+
+.baseball-complete-icon {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  color: #ffffff;
+  background: var(--sk-teal);
+  border-radius: 50%;
+  font-size: 2.2rem;
+  font-weight: 800;
+  box-shadow: 0 16px 34px rgba(0, 154, 147, 0.24);
+  animation:
+    baseball-complete-pop
+    420ms
+    cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes baseball-complete-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.55) rotate(-8deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+.baseball-complete .eyebrow {
+  margin-bottom: 10px;
+  color: var(--sk-teal);
+}
+
+.baseball-complete h3 {
+  margin-bottom: 18px;
+  font-size: clamp(1.45rem, 4vw, 2rem);
+}
+
+.baseball-answer-label {
+  margin-bottom: 4px;
+  color: #777e8a;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.baseball-answer {
+  display: block;
+  margin-bottom: 18px;
+  color: var(--sk-navy);
+  font-family: "Montserrat", sans-serif;
+  font-size: clamp(2.5rem, 8vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.18em;
+}
+
+.baseball-complete-summary {
+  margin: 0;
+  color: #3b3f49;
+  font-weight: 700;
+}
+
+/* 숫자 야구 모바일 배치 */
+@media (max-width: 620px) {
+  .baseball-scoreboard,
+  .baseball-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .baseball-scoreboard p {
+    text-align: left;
+  }
+
+  #baseball-submit {
+    width: 100%;
+  }
+
+  .baseball-complete {
+    min-height: 330px;
+    padding: 32px 18px;
   }
 }
 
