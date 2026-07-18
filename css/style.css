@@ -1411,6 +1411,28 @@ select:focus {
   text-align: right;
 }
 
+/* 태블릿: 휴일 카드를 2열로 구성 */
+@media (max-width: 900px) {
+  .day-sections {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* 모바일: 휴일 카드를 한 열로 구성하고 시간 열을 축소 */
+@media (max-width: 620px) {
+  .day-sections {
+    grid-template-columns: 1fr;
+  }
+
+  .day-card {
+    padding: 24px;
+  }
+
+  .schedule-list li {
+    grid-template-columns: 54px 1fr;
+  }
+}
+
 /* ==========================================================================
    여행 앨범 및 미디어
    ========================================================================== */
