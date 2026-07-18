@@ -1136,6 +1136,148 @@ select:focus {
 }
 
 /* ==========================================================================
+   여행 앨범 및 미디어
+   ========================================================================== */
+
+.media-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 440px);
+  gap: 28px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.media-intro p {
+  margin-bottom: 0;
+  color: #5a606c;
+}
+
+.audio-card {
+  padding: 18px;
+  background: #f7f8fa;
+  border: 1px solid #e2e5ea;
+  border-radius: 16px;
+}
+
+.trip-grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.trip-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 390px;
+  margin: 0;
+  background: #101114;
+  border-radius: 16px;
+  box-shadow: 0 1px 2px rgba(16, 17, 20, 0.05);
+  isolation: isolate;
+}
+
+.trip-card::after {
+  position: absolute;
+  inset: 36% 0 0;
+  z-index: 1;
+  content: "";
+  background: linear-gradient(transparent, rgba(16, 17, 20, 0.94));
+}
+
+.trip-card::before {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  width: 34px;
+  height: 4px;
+  content: "";
+  background: linear-gradient(90deg, var(--sk-red), var(--sk-orange));
+}
+
+.trip-card img {
+  width: 100%;
+  height: 100%;
+  min-height: 390px;
+  object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), filter 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.trip-card:hover img {
+  filter: saturate(1.08);
+  transform: scale(1.06);
+}
+
+.trip-card figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  padding: 28px;
+  color: #ffffff;
+}
+
+.trip-card strong,
+.trip-card span {
+  display: block;
+}
+
+.trip-card strong {
+  margin-bottom: 5px;
+  font-size: 1.28rem;
+}
+
+.trip-card span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.88rem;
+}
+
+.vlog-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(250px, 0.55fr);
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid #e2e5ea;
+  border-radius: 16px;
+}
+
+.vlog-card video {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  object-fit: cover;
+  background: #101114;
+}
+
+.vlog-caption {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px;
+}
+
+.vlog-caption::before {
+  position: absolute;
+  top: 34px;
+  left: 34px;
+  width: 52px;
+  height: 4px;
+  content: "";
+  background: linear-gradient(90deg, var(--sk-red), var(--sk-orange));
+}
+
+.vlog-caption h3 {
+  margin-top: 18px;
+}
+
+.vlog-caption p:last-child {
+  margin-bottom: 0;
+  color: #5a606c;
+}
+
+/* ==========================================================================
    강의 시간표
    ========================================================================== */
 
