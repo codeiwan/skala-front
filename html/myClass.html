@@ -1,74 +1,125 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>나의 강의 시간표</title>
+  <title>학습 시간표</title>
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+  <header class="global-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark"><span>IW</span></span>
+        <span class="brand-copy">
+          <span class="brand-title">박이완의 유니버스</span>
+          <span class="brand-subtitle">Iwan Park's Universe</span>
+        </span>
+      </a>
+
+      <nav class="header-nav">
+        <a href="myClass.html" aria-current="page">학습</a>
+        <a href="myHoliday.html">휴일</a>
+        <a href="myProfile.html">프로필</a>
+        <a href="myTrip.html">여행</a>
+        <a href="signUp.html">회원가입</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="container">
-    <h2>🗓️ 나의 강의 시간표</h2>
-    <table border="1" cellpadding="7" cellspacing="0">
-      <thead>
-        <tr>
-          <th>시간</th>
-          <th>월요일</th>
-          <th>화요일</th>
-          <th>수요일</th>
-          <th>목요일</th>
-          <th>금요일</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>09:00 - 10:00</td>
-          <td rowspan="3">Vue.js<br>웹 프레임워크 💻</td>
-          <td rowspan="2">네트워크<br>보안 기초 🔒</td>
-          <td rowspan="3">웹 시스템<br>설계 및 분석 🛠️</td>
-          <td>IT 트렌드 특강 💡</td>
-          <td rowspan="3">자바스크립트<br>심화 실습 🚀</td>
-        </tr>
-        <tr>
-          <td>10:00 - 11:00</td>
-          <td rowspan="2">데이터베이스<br>SQL 실습 🚪</td>
-        </tr>
-        <tr>
-          <td>11:00 - 12:00</td>
-          <td>알고리즘 문제풀이 🧠</td>
-        </tr>
-        <tr align="center" bgcolor="#f9f9f9">
-          <td>12:00 - 13:00</td>
-          <td colspan="5">🍱 점심시간 🍱</td>
-        </tr>
-        <tr>
-          <td>13:00 - 14:00</td>
-          <td rowspan="4">UI/UX<br>디자인 표준 🎨</td>
-          <td rowspan="2">리눅스<br>시스템 관리 🐧</td>
-          <td rowspan="2">클라우드<br>AWS 기초 ☁️</td>
-          <td rowspan="3">자료구조 📊</td>
-          <td>개인 프로젝트 🚀</td>
-        </tr>
-        <tr>
-          <td>14:00 - 15:00</td>
-          <td rowspan="3">오픈소스<br>소프트웨어 🔓</td>
-        </tr>
-        <tr>
-          <td>15:00 - 16:00</td>
-          <td rowspan="3">Git & GitHub<br>버전 관리 🐙</td>
-          <td rowspan="3">인공지능<br>머신러닝 기초 🤖</td>
-        </tr>
-        <tr>
-          <td>16:00 - 17:00</td>
-          <td rowspan="2">빅데이터<br>분석 실무 📈</td>
-        </tr>
-        <tr>
-          <td>17:00 - 18:00</td>
-          <td>취업 창업 특강 💼</td>
-          <td>주간 회고 📝</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="page-shell">
+      <header class="page-hero">
+        <a class="back-link" href="index.html">← 메인으로 돌아가기</a>
+        <span class="eyebrow">Weekly Class</span>
+        <h1>나의 학습 시간표</h1>
+        <p>월요일부터 금요일까지의 수업과 실습 일정을 시간대별로 정리했습니다.</p>
+      </header>
+
+      <main class="page-content">
+        <section class="content-section">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Schedule Overview</span>
+              <h2>주간 학습 일정</h2>
+            </div>
+            <p>수업이 연속되는 시간은 병합된 셀로 표현했습니다.</p>
+          </div>
+
+          <div class="table-wrapper">
+            <table>
+              <caption>2026년 주간 강의 및 프로젝트 시간표</caption>
+              <thead>
+                <tr>
+                  <th>시간</th>
+                  <th>월요일</th>
+                  <th>화요일</th>
+                  <th>수요일</th>
+                  <th>목요일</th>
+                  <th>금요일</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">09:00-10:00</th>
+                  <td rowspan="3">Vue.js<br>웹 프레임워크</td>
+                  <td rowspan="2">네트워크<br>보안 기초</td>
+                  <td rowspan="3">웹 시스템<br>설계 및 분석</td>
+                  <td>IT 트렌드 특강</td>
+                  <td rowspan="3">자바스크립트<br>심화 실습</td>
+                </tr>
+                <tr>
+                  <th scope="row">10:00-11:00</th>
+                  <td rowspan="2">데이터베이스<br>SQL 실습</td>
+                </tr>
+                <tr>
+                  <th scope="row">11:00-12:00</th>
+                  <td>알고리즘 문제풀이</td>
+                </tr>
+                <tr class="lunch-row">
+                  <th scope="row">12:00-13:00</th>
+                  <td colspan="5">점심시간</td>
+                </tr>
+                <tr>
+                  <th scope="row">13:00-14:00</th>
+                  <td rowspan="4">UI/UX<br>디자인 표준</td>
+                  <td rowspan="2">리눅스<br>시스템 관리</td>
+                  <td rowspan="2">클라우드<br>AWS 기초</td>
+                  <td rowspan="3">자료구조</td>
+                  <td>개인 프로젝트</td>
+                </tr>
+                <tr>
+                  <th scope="row">14:00-15:00</th>
+                  <td rowspan="3">오픈소스<br>소프트웨어</td>
+                </tr>
+                <tr>
+                  <th scope="row">15:00-16:00</th>
+                  <td rowspan="3">Git &amp; GitHub<br>버전 관리</td>
+                  <td rowspan="3">인공지능<br>머신러닝 기초</td>
+                </tr>
+                <tr>
+                  <th scope="row">16:00-17:00</th>
+                  <td rowspan="2">빅데이터<br>분석 실무</td>
+                </tr>
+                <tr>
+                  <th scope="row">17:00-18:00</th>
+                  <td>취업 창업 특강</td>
+                  <td>주간 회고</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="table-note">표를 좌우로 밀어 전체 요일을 확인할 수 있습니다.</p>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <p><small>&copy; 2026 박이완의 유니버스.</small></p>
+          <span class="footer-mark">Class Schedule</span>
+        </div>
+      </footer>
+    </div>
   </div>
 </body>
 </html>
