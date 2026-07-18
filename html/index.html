@@ -150,14 +150,14 @@
             <div>
               <span class="eyebrow">JavaScript Lab</span>
               <h2>자바스크립트 천국</h2>
-              <p>간단한 기능과 게임을 실행해 보세요.</p>
+              <p class="muted">간단한 기능과 게임을 실행해 보세요.</p>
             </div>
 
-            <div>
-              <button>업다운 게임</button>
-              <button>성적 계산기</button>
-              <button>내 가방 보기</button>
-              <button>황새 오래걷기</button>
+            <div class="game-buttons">
+              <button type="button" class="btn-submit" onclick="startGame()">업다운 게임</button>
+              <button type="button" class="btn-submit" onclick="checkGrade()">성적 계산기</button>
+              <button type="button" class="btn-submit" onclick="showMyBag()">내 가방 보기</button>
+              <button type="button" class="btn-submit" onclick="openStorkGame()">황새 오래걷기</button>
             </div>
           </section>
         </aside>
@@ -175,6 +175,31 @@
     </div>
   </div>
 
+  <div id="stork-game-modal" class="game-modal" hidden>
+    <button type="button" class="game-modal-backdrop" onclick="closeStorkGame()"></button>
+    <div class="game-modal-content">
+      <div class="game-modal-header">
+        <div>
+          <h2>황새 오래걷기</h2>
+          <p>게임 화면을 클릭한 후 스페이스바로 게임을 시작하여 방향키로 조작하세요.</p>
+        </div>
+        <button type="button" class="game-modal-close" onclick="closeStorkGame()">x</button>
+      </div>
+
+      <div id="stork-game-player" class="game-player"></div>
+
+      <div class="game-modal-footer">
+        <button type="button" class="btn-reset" onclick="restartStorkGame()">다시 시작</button>
+        <button type="button" class="btn-submit" onclick="closeStorkGame()">게임 닫기</button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="../script/realtimeInfo.js"></script>
+  <script src="../script/upDown.js"></script>
+  <script src="../script/grade.js"></script>
+  <script src="../script/bag.js"></script>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <script src="../script/swfGame.js"></script>
 </body>
 </html>
